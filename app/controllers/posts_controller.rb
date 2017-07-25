@@ -34,6 +34,21 @@ class PostsController < ApplicationController
     render "like"
   end
 
+  def collection
+     @post = Post.find(params[:id])
+     unless @post.find_collection(current_user)    #如果已经按过，就不能再新增
+       Collection.create( :user => current_user, :post => @post)
+     end
+   end
+
+   def uncollection
+     @post = Post.find(params[:id])
+     collection = @post.find_collection(current_user)
+     collection.destroy
+
+     render "collection"
+   end
+
   protected
 
   def post_params
