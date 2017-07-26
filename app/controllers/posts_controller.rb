@@ -75,6 +75,7 @@ class PostsController < ApplicationController
 
 
   def update
+    sleep(1)
     @post = Post.find(params[:id])
     @post.update!( post_params )
 
