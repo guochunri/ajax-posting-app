@@ -14,3 +14,23 @@
 
   <% end %>
 </div>
+
+
+<script>
+  $(".delete-post").click(function(evt){
+    evt.preventDefault();
+    var url = $(this).attr("href");
+
+    // 送出 Ajax
+    $.ajax({
+      url: url,
+      method: 'DELETE',
+
+       dataType: 'json', // 要求服务器回传 json
+       success: function(data){   // data 就是服务器回传的 JSON 资料
+         $("#post-" + data["id"]).remove();
+       }
+    })
+  })
+  
+</script>
